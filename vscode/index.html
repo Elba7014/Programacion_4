@@ -4,7 +4,7 @@
 <head><!-- Define la cabecera del documento -->
     <meta charset="UTF-8"><!-- Definimos la codificacion del documento  -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bienvenidos a Progra IV</title><!-- Titulo de la aplicacion en la ventana del navegador -->
+    <title>Registro-Rodriguez Perdomo</title><!-- Titulo de la aplicacion en la ventana del navegador -->
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
 </head>
@@ -18,43 +18,94 @@
                         <div class="col-sm text-center text-white bg-primary">
                             <h5>REGISTRO DE ESTUDIANTES</h5>
                         </div>
+
+                    </div>
+                    <div class="row p-2">
+                        <div class="col-sm">Codigo :</div>
+                        <div class="col-sm">
+                            <input v-model="ALUMNOS.Codigo" required pattern=" ^ [AZ] {2} [0-9] {8} $ " type = " text " class = " form-control form-control-sm " >
+                        </div>
+                    </div> 
+
                     </div>
                     <div class="row p-2">
                         <div class="col-sm">Nombre completo:</div>
                         <div class="col-sm">
-                            <input v-model="producto.codigo" required pattern="^[A-Z]{2}[0-9]{8}$" type="text" class="form-control form-control-sm" >
+                            <input v-model="ALUMNOS.Nombre" required pattern="^[A-ZÑña-z0-9 ]{5,65}" type="text" class="form-control form-control-sm">
                         </div>
-                    </div>
+                    </div> 
+                    
                     <div class="row p-2">
-                        <div class="col-sm">Edad: </div>
+                        <div class="col-sm">Direccion: </div>
                         <div class="col-sm">
-                            <input v-model="producto.descripcion" required pattern="[A-ZÑña-z0-9 ]{5,65}" type="text" class="form-control form-control-sm">
+                            <input v-model="ALUMNOS.Direccion" required pattern= " ^ [AZ] {2} [0-9] {8} $ " type="text" class="form-control form-control-sm" >
                         </div>
                     </div>
+                </div>
+
+            </div>
+            <div class="row p-2">
+                <div class="col-sm">Municipio:</div>
+                <div class="col-sm">
+                    <input v-model="ALUMNOS.Municipio" required pattern="^[A-ZÑña-z0-9 ]{5,65}" type="text" class="form-control form-control-sm">
+                </div>
+            </div
+
+            </div>
+            <div class="row p-2">
+                <div class="col-sm">Departamento:</div>
+                <div class="col-sm">
+                    <select name="Departamento">
+
+                        <option>Ahuachapán</option>
+                        <option>Santa Ana</option>
+                        <option>Sonsonate</option>
+                        <option>La Libertad</option>
+                        <option>Chalatenango</option>
+                        <option>Cuscatlán</option>
+                        <option>San Salvador</option>
+                        <option>La Paz</option>
+                        <option>Cabañas</option> 
+                        <option>San Vicente</option> 
+                        <option>Usulután</option> 
+                        <option>San Miguel</option> 
+                        <option>Morazán</option> 
+                        <option>La Unión</option>   
+
+                        </select>
+                </div>
+
+            </div>
+            <div class="row p-2">
+                <div class="col-sm">Telefono:</div>
+                <div class="col-sm">
+                    <input v-model="ALUMNOS.Telefono" required pattern="^[0-9] {8} $" type="number" class="form-control form-control-sm">
+                </div>
+            </div
+
+        </div>
+        <div class="row p-2">
+            <div class="col-sm">Fecha de nacimiento:</div>
+            <div class="col-sm">
+                <input v-model="ALUMNOS.Fecha de nacimiento" required pattern="[0-9] $" type="date" class="form-control form-control-sm">
+            </div>
+        </div
+                    
                     <div class="row p-2">
                         <div class="col-sm">Sexo:</div>
                         <div class="col-sm">
-                            <input v-model="producto.precio" required pattern="^[0-9](.)+?[0-9]$" type="text" class="form-control form-control-sm">
+                            <input type="radio" name="sexo" value="1">Femenino
+                            <br>
+                            <input type="radio" name="sexo" value="2" checked>Masculino   
+                            <br>
                         </div>
                     </div>
-                </div>
-                <div class="row p-2">
-                    <div class="col-sm">Grado:</div>
-                    <div class="col-sm">
-                        <input v-model="producto.precio" required pattern="^[0-9](.)+?[0-9]$" type="text" class="form-control form-control-sm">
-                    </div>
-                </div>
-                <div class="row p-2">
-                    <div class="col-sm">Responsable:</div>
-                    <div class="col-sm">
-                        <input v-model="producto.precio" required pattern="^[0-9](.)+?[0-9]$" type="text" class="form-control form-control-sm">
-                    </div>
-                </div>
+            
                 </div>
                     <div class="row p-2">
                         <div class="col-sm">IMAGEN:</div>
                         <div class="col-sm">
-                            <img width="200" height="200" class="rounded-circle" :src="producto.img">
+                            <img width="200" height="200" class="rounded-circle" :src="ALUMNOS.img">
                             <!--<img class="img-fluid" :src="producto.img2">-->
                             <input v-on:change="obtenerImg($event)" multiple type="file" class="form-control form-control-sm">
                         </div>
@@ -76,19 +127,27 @@
                             <table class="tble table-sm">
                                 <thead>
                                     <tr>
+                                        <th>Codigo</th>
                                         <th>Nombre</th>
-                                        <th>Edad</th>
+                                        <th>Direccion</th>
+                                        <th>Municipio</th>
+                                        <th>Departamento</th>
+                                        <th>Telefono</th>
+                                        <th>Fecha de nacimiento</th>
                                         <th>Sexo</th>
-                                        <th>Grado</th>
-                                        <th>Responsable</th>
                                         <th>IMG</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for="pro in productos" v-on:click="mostrarProducto(pro)">
+                                    <tr v-for="pro in ALUMNOS" v-on:click="mostraralumno(pro)">
                                         <td>{{ pro.codigo }}</td>
-                                        <td>{{ pro.descripcion }}</td>
-                                        <td>{{ pro.precio }}</td>
+                                        <td>{{ pro.nombre }}</td>
+                                        <td>{{ pro.direccion }}</td>
+                                        <td>{{ pro.municipio }}</td>
+                                        <td>{{ pro.departamento }}</td>
+                                        <td>{{ pro.telefono }}</td>
+                                        <td>{{ pro.fecha de nacimiento }}</td>
+                                        <td>{{ pro.sexo }}</td>
                                         <td>{{ pro.img }}</td>
                                     </tr>
                                 </tbody>

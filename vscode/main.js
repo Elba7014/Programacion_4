@@ -7,14 +7,19 @@ var appVue = new Vue({
     el:'#appRegistroAlumnos',
     data:{
         producto:{
-            idAlumno  : 0,
-            nombre      : '',
-            edad        : '',
-            sexo        : '',
-            grado       : '',
-            responsable : '',
-            img         : '/images/No-image-available.png',
-            img2        : '/images/No-image-available.png'
+            idAlumno            : 0,
+            codigo              : '',
+            nombre              : '',
+            direccion           : '',
+            municipio           : '',
+            departamento        : '',
+            telefono            : '',
+            fecha_de_nacimiento : '',
+            sexo                : '',
+            grado               : '',
+            responsable         : '',
+            img                 : '/images/No-image-available.png',
+            img2                : '/images/No-image-available.png'
         },
         alumno:[]
     },
@@ -25,7 +30,7 @@ var appVue = new Vue({
              */
             miDBAlumnos.transaction(tran=>{
                 tran.executeSql('INSERT INTO productos(idAlumno,nombre,edad,sexo,grado,responsable,img) VALUES(?,?,?,?,?,?,?,?) ',
-                    [++id,this.alumno.nombre,this.alumno.edad,this.alumno.sexo, this.alumno.grado, this.alumno.responsable, this.alumno.img]);
+                    [++id,this.alumno.codigo, this.alumno.nombre,this.alumno.direccion,this.alumno.municipio,this.alumno.departamento,this.alumno.telefono,this.alumno.fecha_de_nacimiento,this.alumno.sexo, this.alumno.img]);
                 this.obtenerAlumnos();
                 this.limpiar();
             }, err=>{
@@ -54,20 +59,23 @@ var appVue = new Vue({
             this.alumno = pro;
         },
         limpiar(){
+            this.alumno.codigo='';
             this.alumno.nombre='';
-            this.alumno.edad='';
+            this.alumno.direccion='';
+            this.alumno.municipio='';
+            this.alumno.departamento='';
+            this.alumno.telefono='';
+            this.alumno.fecha_de_nacimiento='';
             this.alumno.sexo='';
-            this.alumno.grado='';
-            this.alumno.responsable='';
             this.alumno.img='';
         }
     },
     created(){
         miDBAlumnos.transaction(tran=>{
-            tran.executeSql('CREATE TABLE IF NOT EXISTS productos(idAlumno int PRIMARY KEY NOT NULL, codigo varchar(10), descripcion varchar(65), precio decimal(4,2),img varchar(100))');
+            tran.executeSql('CREATE TABLE IF NOT EXISTS alumnos(idAlumno int PRIMARY KEY NOT NULL, codigo varchar(10), nombre varchar(65), direccion varchar(65), municipio varchar(65), fecha de nacimiento varchar(65),precio number(4,2),img varchar(100))');
         }, err=>{
             console.log( err );
         });
-        this.obtenerProductos();
+        this.obtenerAlumnos();
     }
 });
